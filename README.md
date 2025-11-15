@@ -1,6 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio - Next.js
 
-## Getting Started
+This is a [Next.js](https://nextjs.org) portfolio project showcasing my work and experience.
+
+## 🚀 Getting Started
 
 First, run the development server:
 
@@ -16,21 +18,83 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📋 Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint errors automatically
+- `npm run type-check` - Run TypeScript type checking
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework**: Next.js 16
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI, Shadcn UI
+- **Animations**: Framer Motion
+- **Database**: Vercel KV
+- **Deployment**: Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔄 CI/CD Pipeline
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project includes comprehensive GitHub Actions workflows:
 
-## Deploy on Vercel
+### CI Pipeline
+- ✅ **Lint**: Code quality checks with ESLint
+- ✅ **Type Check**: TypeScript validation
+- ✅ **Build**: Production build verification
+- ✅ **Security Audit**: Dependency vulnerability scanning
+- ✅ **CodeQL**: Automated security analysis
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Deploy Pipeline
+- 🚀 Automatic deployment to Vercel on successful CI
+- 🔒 Secure deployment with environment variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [`.github/workflows/README.md`](.github/workflows/README.md) for detailed documentation.
+
+## 📦 Project Structure
+
+```
+├── src/
+│   ├── app/              # Next.js app router pages
+│   ├── components/       # React components
+│   ├── lib/              # Utility functions
+│   ├── data/             # Static data (CV, etc.)
+│   └── types/            # TypeScript type definitions
+├── public/               # Static assets
+└── .github/workflows/    # CI/CD pipelines
+```
+
+## 🔐 Environment Variables
+
+Required environment variables:
+
+- `NEXT_PUBLIC_BASE_URL` - Base URL for the application (optional)
+
+For Vercel KV (if using):
+- `KV_REST_API_URL` - Vercel KV REST API URL
+- `KV_REST_API_TOKEN` - Vercel KV REST API token
+
+## 🚢 Deployment
+
+The project is configured for automatic deployment to Vercel:
+
+1. Push to `main` or `master` branch
+2. CI pipeline runs automatically
+3. On success, deployment pipeline triggers
+4. Application deploys to Vercel
+
+### Manual Deployment
+
+```bash
+npm run build
+npm run start
+```
+
+## 📚 Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Next.js Deployment](https://nextjs.org/docs/app/building-your-application/deploying)
+- [Vercel Platform](https://vercel.com/new)

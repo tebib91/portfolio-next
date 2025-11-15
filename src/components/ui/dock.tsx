@@ -1,61 +1,49 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { FloatingDock } from "@/components/ui/floating-dock";
+import { DownloadCvDialog } from "@/components/download-cv-dialog";
 import {
   GithubIcon,
-  XIcon,
   HomeIcon,
-  SectionIcon,
-  TerminalIcon,
+  Download,
+  Linkedin,
+  BriefcaseIcon,
 } from "lucide-react";
 
 export function FloatingDockDemo() {
+  const [isDownloadDialogOpen, setIsDownloadDialogOpen] = useState(false);
+
   const links = [
     {
       title: "Home",
       icon: (
         <HomeIcon className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "/",
     },
-
     {
-      title: "Products",
+      title: "Experience",
       icon: (
-        <TerminalIcon className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <BriefcaseIcon className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "/experience",
     },
     {
-      title: "Components",
+      title: "Download CV",
       icon: (
-        <SectionIcon className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <Download className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "#",
+      href: "#download-cv",
+      onClick: (e: React.MouseEvent) => {
+        e.preventDefault();
+        setIsDownloadDialogOpen(true);
+      },
     },
     {
-      title: "Aceternity UI",
+      title: "Linkedin",
       icon: (
-        <img
-          src="https://assets.aceternity.com/logo-dark.png"
-          width={20}
-          height={20}
-          alt="Aceternity Logo"
-        />
-      ),
-      href: "#",
-    },
-    {
-      title: "Changelog",
-      icon: (
-        <XIcon  className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
-    },
-
-    {
-      title: "Home Assistant",
-      icon: (
-        <HomeIcon className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <Linkedin className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
       href: "https://ha.ahmedtabib.com",
     },
@@ -68,11 +56,16 @@ export function FloatingDockDemo() {
     },
   ];
   return (
-    <div className="flex items-center justify-center mr-auto w-full">
-      <FloatingDock
-        // only for demo, remove for production
-        items={links}
+    <>
+      <div className="flex items-center justify-center mr-auto w-full">
+        <FloatingDock
+          items={links}
+        />
+      </div>
+      <DownloadCvDialog
+        open={isDownloadDialogOpen}
+        onOpenChange={setIsDownloadDialogOpen}
       />
-    </div>
+    </>
   );
 }

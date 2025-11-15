@@ -194,8 +194,8 @@ export const cvData: CV = {
   ],
   skills: {
     languages: ["TypeScript", "JavaScript", "HTML", "SCSS", "Python", "XML", "YAML"],
-    frameworks: ["Angular2+", "NodeJS", "ExpressJS", "ReactJS"],
-    testing: ["RobotFramework", "TDD", "BDD", "Selenium"],
+    frameworks: ["Angular", "NodeJS", "ExpressJS", "ReactJS"],
+    testing: ["RobotFramework", "TDD", "BDD", "Selenium", 'Jest'],
     devops: ["Docker", "Kubernetes", "GitLab", "Jenkins", "SonarQube", "Octoperf"],
     cloud: ["AWS", "GCP"],
     databases: ["MongoDB", "DynamoDB"],
