@@ -1,35 +1,12 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { TypewriterEffectDemo } from "./typewriter-effect-demo";
 
 export function BackgroundGrid() {
 
-  const [bgColor, setBgColor] = useState<string | null>(null);
-  const [isDark, setIsDark] = useState(false);
+  const isDark = !!document.documentElement.classList.contains("dark");
 
-  useEffect(() => {
-    // Get your accent color from localStorage
-    if (typeof window === "undefined") return;
-    const storedColor = localStorage.getItem("bg-accent");
-    console.log("storedColor (from localStorage):", storedColor);
-    if (storedColor) {
-      setBgColor(storedColor);
-    } else {
-      setBgColor(null);
-    }
-
-    // detect dark mode class on the document root
-    setIsDark(document.documentElement.classList.contains("dark"));
-    
-  }, []);
-
-  // Log when bgColor actually updates
-  useEffect(() => {
-    console.log("bgColor updated:", bgColor);
-  }, [bgColor]);
-  
   // Inline styles for the dot grid and the accent overlay so we can use dynamic colors
   const dotBgStyle: React.CSSProperties = {
     backgroundSize: "20px 20px",

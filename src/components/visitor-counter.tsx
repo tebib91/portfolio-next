@@ -24,7 +24,6 @@ function AnimatedNumber({ value }: { value: number }) {
 
   return <motion.span>{display}</motion.span>;
 }
-const isLocal = typeof window !== "undefined" && (window.location.hostname === "localhost")
 export function VisitorCounter({ initialCount }: VisitorCounterProps) {
   const [count, setCount] = useState(initialCount);
   const [isVisible, setIsVisible] = useState(false);
@@ -46,11 +45,7 @@ export function VisitorCounter({ initialCount }: VisitorCounterProps) {
         setIsVisible(true); // still show the badge
       }
     };
-    // Skip incrementing views on local development
-    // if (isLocal) {
-    //   setIsVisible(true);
-    //   return;
-    // }
+
     incrementViews();
   }, []);
   

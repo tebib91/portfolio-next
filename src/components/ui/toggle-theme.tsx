@@ -26,6 +26,7 @@ export function ModeToggle() {
             localStorage.setItem("bg-accent", color);
         } catch (e) {
             // ignore
+            console.error("Error setting accent color:", e);
         }
     };
 

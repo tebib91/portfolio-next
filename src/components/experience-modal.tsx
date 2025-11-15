@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -12,32 +12,23 @@ import {
 import { Button } from "@/components/ui/button";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { techIconMap } from "@/lib/tech-icons";
+import { Experience } from "@/types/cv";
 
 export function ExperienceModal({ open, onOpenChange, experience }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  experience: any | null;
+  experience: Experience | null;
 }) {
-  const [accentColor, setAccentColor] = useState<string | null>(null);
-  const [accentBg, setAccentBg] = useState<string>("bg-blue-500");
 
   // Read accent color from localStorage and compute background class
   useEffect(() => {
     if (typeof window === "undefined") return;
+
     const saved = localStorage.getItem("bg-accent");
-    if (saved) {
-      setAccentColor(saved);
-      // Extract color name from rgba for Tailwind-friendly class
-      const colorMap: Record<string, string> = {
-        "rgba(236,72,153,0.18)": "from-pink-500 to-pink-600",
-        "rgba(20,184,166,0.18)": "from-teal-500 to-teal-600",
-        "rgba(124,58,237,0.18)": "from-purple-500 to-purple-600",
-        "rgba(251,191,36,0.18)": "from-amber-500 to-amber-600",
-        "rgba(59,130,246,0.18)": "from-blue-500 to-blue-600",
-      };
-      setAccentBg(colorMap[saved] || "from-blue-500 to-blue-600");
-    }
-  }, [open]);
+    // skip everything if nothing is saved
+    if (!saved) return;
+   }, [open]);
+
 
   if (!experience) {
     return (
@@ -71,7 +62,7 @@ export function ExperienceModal({ open, onOpenChange, experience }: {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className={`max-w-3xl border-0 shadow-2xl `}>
         {/* Accent gradient background */}
-        <div className="absolute inset-0 -z-10 rounded-lg opacity-20" style={{ background: accentColor || "rgba(59,130,246,0.1)" }} />
+        <div className="absolute inset-0 -z-10 rounded-lg opacity-20" style={{ background: "rgba(59,130,246,0.1)" }} />
         
         <DialogHeader className="border-b border-white/10 pb-4">
           <DialogTitle className="text-2xl font-bold text-white">
@@ -102,7 +93,7 @@ export function ExperienceModal({ open, onOpenChange, experience }: {
                   <li key={i} className="flex gap-3 text-sm text-white/80">
                     <span 
                       className="flex-shrink-0 w-1.5 h-1.5 rounded-full mt-2"
-                      style={{ backgroundColor: accentColor ? "rgba(59,130,246,1)" : "rgba(59,130,246,1)" }}
+                      style={{ backgroundColor: "rgba(59,130,246,1)" }}
                     />
                     <span>{t}</span>
                   </li>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { WobbleCard } from "./ui/wobble-card";
 import { ExperienceModal } from "@/components/experience-modal";
 import { cvData } from "@/data/cv";
@@ -11,21 +11,24 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import Image from "next/image";
+import { Experience } from "@/types/cv";
 
 interface ExperienceModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 export function ExperienceSection({ open, onOpenChange }: ExperienceModalProps) {
-  const [openExperienceModal, setOpenExperienceModal] = useState(false);
-  const [selected, setSelected] = useState<any | null>(null);
+  const [openExperienceModal, setOpenExperienceModal] = useState<boolean>(false);
+  const [selected, setSelected] = useState<Experience | null>(null);
 
-  const openModalExperience = (exp: any) => {
+  const openModalExperience = (exp: Experience) => {
     setSelected(exp);
     setOpenExperienceModal(true);
   };
 
-  // Create stable random styles per experience so layout is varied but doesn't change on re-render
+  // Create stable random styles per experience using deterministic seeding based on index
+  // This ensures styles don't change on re-render but still look varied
   const randomStyles = useMemo(() => {
     const bgOptions = [
       "bg-pink-800",
@@ -36,12 +39,16 @@ export function ExperienceSection({ open, onOpenChange }: ExperienceModalProps) 
       "bg-rose-800",
       "bg-indigo-700",
     ];
-const colSpanPattern = ["lg:col-span-2", "lg:col-span-1", "lg:col-span-1", "lg:col-span-2"];
+    const colSpanPattern = ["lg:col-span-2", "lg:col-span-1", "lg:col-span-1", "lg:col-span-2"];
 
-    return cvData.experiences.map((_, index) => { 
-      const bg = bgOptions[Math.floor(Math.random() * bgOptions.length)];
+    return cvData.experiences.map((_, index) => {
+      // Use deterministic "random" based on index to avoid impure function errors
+      const bgIndex = (index * 7) % bgOptions.length;
+      const bg = bgOptions[bgIndex];
       const colSpan = colSpanPattern[index % colSpanPattern.length];
-      const rotate = Math.random() > 0.95 ? "-rotate-1" : Math.random() > 0.95 ? "rotate-1" : "";
+      // Rotate based on index: every 20th card gets a slight rotation
+      const rotateIndex = index % 20;
+      const rotate = rotateIndex === 0 ? "-rotate-1" : rotateIndex === 10 ? "rotate-1" : "";
       return { bg, colSpan, rotate };
     });
   }, []);
@@ -69,7 +76,7 @@ const colSpanPattern = ["lg:col-span-2", "lg:col-span-1", "lg:col-span-1", "lg:c
                   <p className="text-xs text-neutral-400 mt-1">{exp.period}</p>
                 </div>
                 {/* Right side decorative image background */}
-                <img
+                <Image
                   src={exp.imageUrl}
                   width={300}
                   height={300}

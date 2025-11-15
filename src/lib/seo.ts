@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { title } from "process";
 
 export const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://ahmedtabib.com";
 
