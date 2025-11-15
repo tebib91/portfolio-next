@@ -43,8 +43,7 @@ export function ExperienceSection({ open, onOpenChange }: ExperienceModalProps) 
 
     return cvData.experiences.map((_, index) => {
       // Use deterministic "random" based on index to avoid impure function errors
-      const bgIndex = (index * 7) % bgOptions.length;
-      const bg = bgOptions[bgIndex];
+      const bg = bgOptions[index % bgOptions.length];
       const colSpan = colSpanPattern[index % colSpanPattern.length];
       // Rotate based on index: every 20th card gets a slight rotation
       const rotateIndex = index % 20;
