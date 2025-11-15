@@ -197,7 +197,7 @@ export const cvData: CV = {
       project: "Application RH",
       tasks: ["Intégration responsive", "Développement modules"],
       technologies: [],
-      imageUrl: "/images/auna.webp",
+      imageUrl: "/images/auna.png",
     },
   ],
   skills: {

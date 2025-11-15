@@ -1,0 +1,36 @@
+# Robots.txt for Ahmed Tabib Portfolio
+# Allows search engines to crawl and index the site
+
+User-agent: *
+Allow: /
+Allow: /api/cv
+Disallow: /api/cv-download
+Disallow: /api/views
+Disallow: *.json$
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# LinkedIn bot
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 1
+
+# Twitter/X bot
+User-agent: Twitterbot
+Allow: /
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://ahmedtabib.com/sitemap.xml

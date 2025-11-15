@@ -8,7 +8,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -37,11 +36,11 @@ export function ExperienceSection({ open, onOpenChange }: ExperienceModalProps) 
       "bg-rose-800",
       "bg-indigo-700",
     ];
-    const colSpanOptions = ["lg:col-span-1", "lg:col-span-1", "lg:col-span-1", "lg:col-span-2"]; // mostly single, sometimes double
+const colSpanPattern = ["lg:col-span-2", "lg:col-span-1", "lg:col-span-1", "lg:col-span-2"];
 
-    return cvData.experiences.map(() => {
+    return cvData.experiences.map((_, index) => { 
       const bg = bgOptions[Math.floor(Math.random() * bgOptions.length)];
-      const colSpan = colSpanOptions[Math.floor(Math.random() * colSpanOptions.length)];
+      const colSpan = colSpanPattern[index % colSpanPattern.length];
       const rotate = Math.random() > 0.95 ? "-rotate-1" : Math.random() > 0.95 ? "rotate-1" : "";
       return { bg, colSpan, rotate };
     });
@@ -63,7 +62,8 @@ export function ExperienceSection({ open, onOpenChange }: ExperienceModalProps) 
             return (
               <WobbleCard key={idx} containerClassName={containerClass} className="cursor-pointer">
                 {/* Left text content, centered vertically */}
-                <div onClick={() => openModalExperience(exp)} className="absolute inset-0 flex flex-col justify-center p-4 z-10 w-1/2">
+                <div onClick={() => openModalExperience(exp)} >
+                <div className="absolute inset-0 flex flex-col justify-center p-4 z-10 w-1/2">
                   <h3 className="text-sm font-semibold text-white truncate">{exp.company}</h3>
                   <p className="text-xs text-neutral-200 truncate line-clamp-2">{exp.title}</p>
                   <p className="text-xs text-neutral-400 mt-1">{exp.period}</p>
@@ -76,6 +76,7 @@ export function ExperienceSection({ open, onOpenChange }: ExperienceModalProps) 
                   alt="decor"
                   className="absolute -right-1 bottom-4 w-32 h-32 object-contain  opacity-60"
                 />
+                </div>
               </WobbleCard>
             );
           })}

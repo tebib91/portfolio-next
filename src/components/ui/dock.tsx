@@ -10,7 +10,7 @@ import {
   Linkedin,
   BriefcaseIcon,
 } from "lucide-react";
-import { ExperienceSection } from "../wobble-card-demo";
+import { ExperienceSection } from "../experience-section";
 
 export function FloatingDockDemo() {
   const [isDownloadDialogOpen, setIsDownloadDialogOpen] = useState(false);
