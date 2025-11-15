@@ -3,26 +3,9 @@ import { ModeToggle } from "@/components/ui/toggle-theme";
 import { FloatingDockDemo } from "@/components/ui/dock";
 import { FloatingTechIcons } from "@/components/floating-tech-icons";
 import { VisitorCounterWrapper } from "@/components/visitor-counter-wrapper";
-import { HomeIcon, MailIcon, UserIcon } from "lucide-react";
 
 export default function Home() {
-  const dockItems = [
-    {
-      label: "Home",
-      href: "/",
-      icon: <HomeIcon />,
-    },
-    {
-      label: "About",
-      href: "/about",
-      icon: <UserIcon />,
-    },
-    {
-      label: "Contact",
-      href: "/contact",
-      icon: <MailIcon />,
-    },
-  ]
+
   return (
     <div className="min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black relative">
       

@@ -24,7 +24,7 @@ export function FloatingTechIcons() {
   useEffect(() => {
     setIsMounted(true);
     
-    const iconSize = 3; // Icon size in percentage (48px / viewport)
+    // const iconSize = 3; // Icon size in percentage (48px / viewport)
     const minDistance = 6; // Minimum distance between icons in percentage
     const maxAttempts = 100; // Maximum attempts to find a valid position
     

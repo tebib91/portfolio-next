@@ -30,7 +30,6 @@ export function VisitorCounter({ initialCount }: VisitorCounterProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Increment view count on client-side mount
     const incrementViews = async () => {
       try {
         const response = await fetch("/api/views", {
@@ -38,15 +37,19 @@ export function VisitorCounter({ initialCount }: VisitorCounterProps) {
           cache: "no-store",
         });
         const data = await response.json();
+  
+        // Update both states together
         setCount(data.total);
+        setIsVisible(true);
       } catch (error) {
         console.error("Failed to increment view count:", error);
+        setIsVisible(true); // still show the badge
       }
     };
-
+  
     incrementViews();
-    setIsVisible(true);
   }, []);
+  
 
   return (
     <motion.div

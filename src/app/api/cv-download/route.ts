@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { kv } from "@vercel/kv";
+import { Redis } from '@upstash/redis';
 
 export async function POST(request: NextRequest) {
+  // Initialize Redis
+const redis = Redis.fromEnv();
+
   try {
     const { email } = await request.json();
 
@@ -33,10 +36,10 @@ export async function POST(request: NextRequest) {
 
     // Save to database
     const downloadId = `cv-download:${Date.now()}:${Math.random().toString(36).substring(7)}`;
-    await kv.set(downloadId, downloadRecord);
+    await redis.set(downloadId, downloadRecord);
     
     // Also maintain a list of all downloads
-    await kv.lpush("cv-downloads:list", downloadId);
+    await redis.lpush("cv-downloads:list", downloadId);
 
     return NextResponse.json({ success: true, data: downloadRecord });
   } catch (error) {
