@@ -10,9 +10,11 @@ import {
   Linkedin,
   BriefcaseIcon,
 } from "lucide-react";
+import { ExperienceSection } from "../wobble-card-demo";
 
 export function FloatingDockDemo() {
   const [isDownloadDialogOpen, setIsDownloadDialogOpen] = useState(false);
+  const [isExperienceModalOpen, setIsExperienceModalOpen] = useState(false);
 
   const links = [
     {
@@ -27,7 +29,11 @@ export function FloatingDockDemo() {
       icon: (
         <BriefcaseIcon className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "/experience",
+      href: "#experience",
+      onClick: (e: React.MouseEvent) => {
+        e.preventDefault();
+        setIsExperienceModalOpen(true);
+      },
     },
     {
       title: "Download CV",
@@ -65,6 +71,10 @@ export function FloatingDockDemo() {
       <DownloadCvDialog
         open={isDownloadDialogOpen}
         onOpenChange={setIsDownloadDialogOpen}
+      />
+      <ExperienceSection
+        open={isExperienceModalOpen}
+        onOpenChange={setIsExperienceModalOpen}
       />
     </>
   );

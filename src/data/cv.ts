@@ -41,6 +41,7 @@ export const cvData: CV = {
         "GitLab",
         "Architecture Hexagonale",
       ],
+      imageUrl: "/images/sncf_voyageurs.webp",
     },
     {
       title: "Consultant Fullstack Angular / NestJS / Mongo",
@@ -56,6 +57,7 @@ export const cvData: CV = {
         "Suivi des activités via Jira",
       ],
       technologies: ["NestJS", "Angular", "MongoDB", "GitHub"],
+      imageUrl: "/images/asn.png",
     },
     {
       title: "Consultant Fullstack React / NodeJS / AWS",
@@ -83,6 +85,7 @@ export const cvData: CV = {
         "CloudWatch",
         "Jenkins",
       ],
+      imageUrl: "/images/sncf-connect.png",
     },
     {
       title: "Consultant Fullstack Angular 13 / NodeJS",
@@ -111,6 +114,7 @@ export const cvData: CV = {
         "MongoDB",
         "SHAKA Player",
       ],
+      imageUrl: "/images/sfr.webp",
     },
     {
       title: "Consultant Fullstack Angular / NodeJS",
@@ -137,6 +141,7 @@ export const cvData: CV = {
         "NodeJS",
         "MongoDB",
       ],
+      imageUrl: "/images/orange.png",
     },
     {
       title: "Consultant Fullstack Angular / NodeJS",
@@ -160,6 +165,7 @@ export const cvData: CV = {
         "MongoDB",
         "SEO",
       ],
+      imageUrl: "/images/kpeiz.jpeg",
     },
     {
       title: "Consultant Fullstack Angular / NodeJS",
@@ -181,6 +187,7 @@ export const cvData: CV = {
         "ElectronJS",
         "WebSocket",
       ],
+      imageUrl: "/images/vynd.jpeg",
     },
     {
       title: "Développeur Web",
@@ -190,6 +197,7 @@ export const cvData: CV = {
       project: "Application RH",
       tasks: ["Intégration responsive", "Développement modules"],
       technologies: [],
+      imageUrl: "/images/auna.webp",
     },
   ],
   skills: {

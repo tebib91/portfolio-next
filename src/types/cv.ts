@@ -33,6 +33,7 @@ export interface Experience {
   project: string;
   tasks: string[];
   technologies: string[];
+  imageUrl: string;
 }
 
 export interface Skills {
