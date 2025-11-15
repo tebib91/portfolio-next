@@ -1,17 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { TypewriterEffectDemo } from "./typewriter-effect-demo";
 
 export function BackgroundGrid() {
-
-  const isDark = !!document.documentElement.classList.contains("dark");
+  // Initialize from the DOM on first render (client only) to avoid calling setState in an effect
+  const [state] = useState(() => ({
+    isDark:
+      typeof window !== "undefined" &&
+      document.documentElement.classList.contains("dark"),
+    mounted: true,
+  }));
 
   // Inline styles for the dot grid and the accent overlay so we can use dynamic colors
   const dotBgStyle: React.CSSProperties = {
     backgroundSize: "20px 20px",
     // Use CSS variable --bg-accent for the dot color so changes apply immediately
-    backgroundImage: isDark
+  backgroundImage: state.isDark
       ? `radial-gradient(#404040 1px, var(--bg-accent, transparent) 1px)`
       : `radial-gradient(#d4d4d4 1px, var(--bg-accent, transparent) 1px)`,
   };

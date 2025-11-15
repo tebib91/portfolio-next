@@ -42,10 +42,12 @@ export function VisitorCounter({ initialCount }: VisitorCounterProps) {
         setIsVisible(true);
       } catch (error) {
         console.error("Failed to increment view count:", error);
-        setIsVisible(true); // still show the badge
+        // Still show the badge even if increment fails, with current count
+        setIsVisible(true);
       }
     };
 
+    // Fetch and increment views on mount
     incrementViews();
   }, []);
   
