@@ -1,10 +1,10 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import React, { useState } from "react";
-import { TypewriterEffectDemo } from "./typewriter-effect-demo";
 
-export function BackgroundGrid() {
-  // Initialize from the DOM on first render (client only) to avoid calling setState in an effect
+export function BackgroundGrid({ children }: { children: React.ReactNode }) {
+   // Initialize from the DOM on first render (client only) to avoid calling setState in an effect
   const [state] = useState(() => ({
     isDark:
       typeof window !== "undefined" &&
@@ -25,17 +25,17 @@ export function BackgroundGrid() {
     background: `radial-gradient(closest-side, var(--bg-accent, rgba(59,130,246,0.12)), transparent)`,
     mixBlendMode: "overlay",
   };
-
   return (
-    <div className="flex h-[50rem] w-full items-center justify-center bg-white dark:bg-black">
+    <div className=" flex h-[50rem] w-full items-center justify-center bg-white dark:bg-black">
       <div className="absolute inset-0" style={dotBgStyle} />
-
-      {/* Radial gradient for the container to give a faded look; accent overlay is inside */}
+      {/* Radial gradient for the container to give a faded look */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black">
-        {accentStyle ? <div className="absolute inset-0 pointer-events-none" style={accentStyle} /> : null}
+                {accentStyle ? <div className="absolute inset-0 pointer-events-none" style={accentStyle} /> : null}
+
       </div>
       <div className="relative z-20 py-8">
-        <TypewriterEffectDemo />
+        {/* children here  */}
+        {children}
       </div>
     </div>
   );

@@ -24,6 +24,8 @@ function AnimatedNumber({ value }: { value: number }) {
 
   return <motion.span>{display}</motion.span>;
 }
+const isLocal =
+  typeof window !== "undefined" && window.location.hostname === "localhost";
 export function VisitorCounter({ initialCount }: VisitorCounterProps) {
   const [count, setCount] = useState(initialCount);
   const [isVisible, setIsVisible] = useState(false);
@@ -36,21 +38,23 @@ export function VisitorCounter({ initialCount }: VisitorCounterProps) {
           cache: "no-store",
         });
         const data = await response.json();
-  
+
         // Update both states together
         setCount(data.total);
         setIsVisible(true);
       } catch (error) {
         console.error("Failed to increment view count:", error);
-        // Still show the badge even if increment fails, with current count
-        setIsVisible(true);
+        setIsVisible(true); // still show the badge
       }
     };
-
-    // Fetch and increment views on mount
+    // Skip incrementing views on local development
+    if (isLocal) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsVisible(true);
+      return;
+    }
     incrementViews();
   }, []);
-  
 
   return (
     <motion.div
@@ -86,4 +90,3 @@ export function VisitorCounter({ initialCount }: VisitorCounterProps) {
     </motion.div>
   );
 }
-

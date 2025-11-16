@@ -19,8 +19,7 @@ export const cvData: CV = {
       location: "Saint-Denis, France",
       period: "Mars 2025 – Aujourd'hui",
       team: "Agile – équipe maintenance TGV / opérations industrielles",
-      project:
-        "PROG ONE & H00 – Gestion des rendez-vous de maintenance, cycle de maintenance TGV et ligne de vie sur sites industriels",
+      project: "PROG ONE & H00 – Gestion des rendez-vous de maintenance, cycle de maintenance TGV et ligne de vie sur sites industriels",
       tasks: [
         "Développement backend en NestJS avec architecture hexagonale",
         "Développement frontend Angular 19 pour interfaces internes maintenance",
@@ -41,7 +40,7 @@ export const cvData: CV = {
         "GitLab",
         "Architecture Hexagonale",
       ],
-      imageUrl: "/images/sncf_voyageurs.webp",
+      imageUrl: ""
     },
     {
       title: "Consultant Fullstack Angular / NestJS / Mongo",
@@ -57,7 +56,7 @@ export const cvData: CV = {
         "Suivi des activités via Jira",
       ],
       technologies: ["NestJS", "Angular", "MongoDB", "GitHub"],
-      imageUrl: "/images/asn.png",
+      imageUrl: ""
     },
     {
       title: "Consultant Fullstack React / NodeJS / AWS",
@@ -85,7 +84,7 @@ export const cvData: CV = {
         "CloudWatch",
         "Jenkins",
       ],
-      imageUrl: "/images/sncf-connect.png",
+      imageUrl: ""
     },
     {
       title: "Consultant Fullstack Angular 13 / NodeJS",
@@ -114,7 +113,7 @@ export const cvData: CV = {
         "MongoDB",
         "SHAKA Player",
       ],
-      imageUrl: "/images/sfr.webp",
+      imageUrl: ""
     },
     {
       title: "Consultant Fullstack Angular / NodeJS",
@@ -141,7 +140,7 @@ export const cvData: CV = {
         "NodeJS",
         "MongoDB",
       ],
-      imageUrl: "/images/orange.png",
+      imageUrl: ""
     },
     {
       title: "Consultant Fullstack Angular / NodeJS",
@@ -165,7 +164,7 @@ export const cvData: CV = {
         "MongoDB",
         "SEO",
       ],
-      imageUrl: "/images/kpeiz.jpeg",
+      imageUrl: ""
     },
     {
       title: "Consultant Fullstack Angular / NodeJS",
@@ -187,7 +186,7 @@ export const cvData: CV = {
         "ElectronJS",
         "WebSocket",
       ],
-      imageUrl: "/images/vynd.jpeg",
+      imageUrl: ""
     },
     {
       title: "Développeur Web",
@@ -197,7 +196,7 @@ export const cvData: CV = {
       project: "Application RH",
       tasks: ["Intégration responsive", "Développement modules"],
       technologies: [],
-      imageUrl: "/images/auna.png",
+      imageUrl: ""
     },
   ],
   skills: {
