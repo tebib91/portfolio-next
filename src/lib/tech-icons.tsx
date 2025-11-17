@@ -37,9 +37,19 @@ export const techIconMap: Record<string, string> = {
 
   // Cloud
   AWS: '/icons/aws.svg',
-  "AWS Lambda": '/icons/aws.png',
   GCP: '/icons/gcp.png',
-  CloudWatch: '/icons/aws.png',
+  Lambda: '/icons/lambda.svg',
+  CloudWatch: '/icons/cloudwatch.svg',
+
+  // Log
+  DataDog: '/icons/datadog.jpeg',
+  'SHAKA Player': '/icons/shaka.png',
+
+  // Outils
+  NX: '/icons/nx.png',
+  RxJS: '/icons/rxjs.png',
+  Bootstrap: '/icons/bootstrap.png',
+  ElectronJS: '/icons/electron.avif',
 
   // Testing
   RobotFramework: '/icons/robotframework.svg',
