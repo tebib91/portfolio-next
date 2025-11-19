@@ -60,7 +60,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const posts = postsJson.posts;
   
   return (
-    <div className="min-h-screen items-center justify-center mt-16 relative rounded-lg">
+    <div className="items-center justify-center relative rounded-lg">
         <BlogPostClient post={post} posts={posts} />
     </div>
   );

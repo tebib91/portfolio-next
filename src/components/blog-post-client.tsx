@@ -126,7 +126,7 @@ interface BlogPostClientProps {
 
 export function BlogPostClient({ post, posts }: BlogPostClientProps) {
   return (
-    <div className="mx-auto max-w-6xl items-center justify-center font-sans relative px-4 sm:px-6 lg:px-8 py-8">
+    <div className="mx-auto max-w-6xl items-center justify-center font-sans relative px-4 sm:px-6">
       <BlogStyles />
       {/* Enhanced layout with better spacing and smooth animations */}
       <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-neutral-900 p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 min-h-[calc(100vh-12rem)] transition-all duration-300 ease-in-out animate-fade-in-up">
