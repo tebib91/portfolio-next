@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Inbox, Newspaper } from "lucide-react";
 import { baseUrl } from "@/lib/seo";
+import { Metadata } from "next";
 
 export default async function Blog() {
   const posts = await getPosts();
@@ -40,8 +41,33 @@ export default async function Blog() {
   );
 }
 
-export const metadata = {
-  title: "Blog",
-  description: "Latest articles on web development, architecture, and performance.",
+export const metadata: Metadata = {
+  title: "Blog | Ahmed Tabib | Full Stack Developer",
+  description:
+    "Latest articles on web development, architecture, and performance. Expert insights on NestJS, Angular, React, AWS, and modern cloud technologies.",
   alternates: { canonical: `${baseUrl}/blog` },
+  openGraph: {
+    type: "website",
+    url: `${baseUrl}/blog`,
+    title: "Blog | Ahmed Tabib | Full Stack Developer",
+    description:
+      "Latest articles on web development, architecture, and performance. Expert insights on NestJS, Angular, React, AWS, and modern cloud technologies.",
+    images: [`${baseUrl}/og-image.png`],
+    siteName: "Ahmed Tabib Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Ahmed Tabib | Full Stack Developer",
+    description:
+      "Latest articles on web development, architecture, and performance. Expert insights on NestJS, Angular, React, AWS, and modern cloud technologies.",
+    images: [`${baseUrl}/og-image.png`],
+    creator: "@tebib91",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    "max-snippet": -1,
+    "max-image-preview": "large",
+    "max-video-preview": -1,
+  },
 };

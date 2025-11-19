@@ -4,34 +4,27 @@ import { cn } from "@/lib/utils";
 import React, { useState } from "react";
 
 export function BackgroundGrid({ children }: { children: React.ReactNode }) {
-   // Initialize from the DOM on first render (client only) to avoid calling setState in an effect
-  const [state] = useState(() => ({
-    isDark:
-      typeof window !== "undefined" &&
-      document.documentElement.classList.contains("dark"),
-    mounted: true,
-  }));
+  // Use state to track if component is mounted (client-side only)
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // Set mounted to true after component mounts on client
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-  // Inline styles for the dot grid and the accent overlay so we can use dynamic colors
-  const dotBgStyle: React.CSSProperties = {
-    backgroundSize: "20px 20px",
-    // Use CSS variable --bg-accent for the dot color so changes apply immediately
-  backgroundImage: state.isDark
-      ? `radial-gradient(#404040 1px, var(--bg-accent, transparent) 1px)`
-      : `radial-gradient(#d4d4d4 1px, var(--bg-accent, transparent) 1px)`,
-  };
-  // Accent overlay uses CSS variable so updates happen immediately
-  const accentStyle: React.CSSProperties = {
-    background: `radial-gradient(closest-side, var(--bg-accent, rgba(59,130,246,0.12)), transparent)`,
-    mixBlendMode: "overlay",
-  };
+  // Use CSS classes instead of inline styles for hydration safety
+  const dotGridClass = isMounted 
+    ? "bg-[radial-gradient(#404040_1px,var(--bg-accent,transparent)_1px)] dark:bg-[radial-gradient(#d4d4d4_1px,var(--bg-accent,transparent)_1px)]"
+    : "bg-[radial-gradient(#d4d4d4_1px,var(--bg-accent,transparent)_1px)]";
+
+  // Use CSS classes for accent overlay to avoid hydration issues
+  const accentClass = "bg-[radial-gradient(closest-side,var(--bg-accent,rgba(59,130,246,0.12)),transparent)]";
   return (
-    <div className=" flex h-[50rem] w-full items-center justify-center bg-white dark:bg-black">
-      <div className="absolute inset-0" style={dotBgStyle} />
+    <div className="flex h-[50rem] w-full items-center justify-center bg-white dark:bg-black">
+      <div className={cn("absolute inset-0 bg-[length:20px_20px]", dotGridClass)} />
       {/* Radial gradient for the container to give a faded look */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black">
-                {accentStyle ? <div className="absolute inset-0 pointer-events-none" style={accentStyle} /> : null}
-
+        <div className={cn("absolute inset-0 pointer-events-none mix-blend-overlay", accentClass)} />
       </div>
       <div className="relative z-20 py-8">
         {/* children here  */}

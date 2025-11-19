@@ -3,7 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { baseUrl, schemaData, metadata as siteMetadata } from "@/lib/seo";
+import { schemaData, metadata as siteMetadata } from "@/lib/seo";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { BackgroundGrid } from "@/components/background-grid";
 import { FloatingTechIcons } from "@/components/floating-tech-icons";

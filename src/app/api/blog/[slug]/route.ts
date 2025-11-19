@@ -9,7 +9,7 @@ export async function GET(
   const resolvedParams = params instanceof Promise ? await params : params;
   const slug = resolvedParams.slug;
 
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }

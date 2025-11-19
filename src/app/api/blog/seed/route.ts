@@ -1,16 +1,16 @@
-import { Redis } from '@upstash/redis';
+import { kv } from '@vercel/kv';
 import { NextResponse } from 'next/server';
-import { EXAMPLE_POSTS } from '../data';
-
-const redis = Redis.fromEnv();
+import { blogPosts } from '@/data/blog';
 
 export async function GET() {
   try {
-    const pipeline = redis.pipeline();
-    EXAMPLE_POSTS.forEach(post => {
-      pipeline.hset(`post:${post.slug}`, post);
-    });
-    await pipeline.exec();
+    // Store all posts
+    await kv.set("blog:posts", blogPosts);
+    
+    // Store individual posts for faster lookup
+    for (const post of blogPosts) {
+      await kv.set(`blog:post:${post.slug}`, post);
+    }
 
     return NextResponse.json({ message: 'Blog posts seeded successfully' });
   } catch (error) {
