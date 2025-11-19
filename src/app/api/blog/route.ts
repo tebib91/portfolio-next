@@ -1,0 +1,8 @@
+import { NextResponse } from "next/server";
+import { getPosts } from "./data";
+
+export async function GET() {
+  const posts = await getPosts();
+  return NextResponse.json({ posts });
+}
+

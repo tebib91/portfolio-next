@@ -9,6 +9,7 @@ import {
   Download,
   Linkedin,
   BriefcaseIcon,
+  Notebook,
 } from "lucide-react";
 import { ExperienceSection } from "../experience-section";
 
@@ -45,6 +46,13 @@ export function FloatingDockDemo() {
         e.preventDefault();
         setIsDownloadDialogOpen(true);
       },
+    },
+     {
+      title: "Blog",
+      icon: (
+        <Notebook className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "/blog",
     },
     {
       title: "Linkedin",
