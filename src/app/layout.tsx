@@ -4,12 +4,12 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { schemaData, metadata as siteMetadata } from "@/lib/seo";
-import { GoogleTagManager } from "@next/third-parties/google";
 import { BackgroundGrid } from "@/components/background-grid";
 import { FloatingTechIcons } from "@/components/floating-tech-icons";
 import { FloatingDockDemo } from "@/components/ui/dock";
 import { ModeToggle } from "@/components/ui/toggle-theme";
 import { VisitorCounterWrapper } from "@/components/visitor-counter-wrapper";
+import GTMScript from "@/lib/google-tag";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -76,8 +76,8 @@ export default function RootLayout({
           </div>
           <Analytics />
           <SpeedInsights />
-          <GoogleTagManager gtmId="G-HQ721RPGYS" />
         </ThemeProvider>
+        <GTMScript />
       </body>
     </html>
   );

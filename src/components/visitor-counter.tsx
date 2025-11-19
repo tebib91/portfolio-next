@@ -29,24 +29,56 @@ const isLocal =
 export function VisitorCounter({ initialCount }: VisitorCounterProps) {
   const [count, setCount] = useState(initialCount);
   const [isVisible, setIsVisible] = useState(false);
+  function getVisitorId() {
+    // Combine user agent + language + platform
+    const raw = `${navigator.userAgent}-${navigator.language}-${navigator.platform}`;
+
+    // Simple hash
+    return btoa(raw).slice(0, 16); // short + anonymized
+  }
+  //call get view here
+  useEffect(() => {
+    const getViews = async () => {
+      try {
+        const res = await fetch("/api/views", { cache: "no-store" });
+        const data = await res.json();
+        setCount(data.total);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    getViews();
+  }, []);
 
   useEffect(() => {
     const incrementViews = async () => {
       try {
-        const response = await fetch("/api/views", {
+        const id = getVisitorId();
+
+        const res = await fetch("/api/views", {
           method: "POST",
           cache: "no-store",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id }),
         });
-        const data = await response.json();
 
-        // Update both states together
-        setCount(data.total);
+        if (!res.ok) {
+          throw new Error(`POST /api/views failed: ${res.status}`);
+        }
+
+        const data = await res.json();
+        if (typeof data.total === "number") {
+          setCount(data.total); // ← this was missing
+        }
+
         setIsVisible(true);
       } catch (error) {
-        console.error("Failed to increment view count:", error);
-        setIsVisible(true); // still show the badge
+        console.error(error);
+        setIsVisible(true);
       }
     };
+
+
     // Skip incrementing views on local development
     if (isLocal) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
