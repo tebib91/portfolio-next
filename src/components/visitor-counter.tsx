@@ -4,6 +4,9 @@ import { motion, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import { Avatar, AvatarFallback } from "./ui/avatar";
+import { AvatarImage } from "@radix-ui/react-avatar";
 
 interface VisitorCounterProps {
   initialCount: number;
@@ -30,29 +33,87 @@ export function VisitorCounter({ initialCount }: VisitorCounterProps) {
   const [count, setCount] = useState(initialCount);
   const [isVisible, setIsVisible] = useState(false);
 
+  function getVisitorId() {
+    let id = localStorage.getItem("visitor-id");
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem("visitor-id", id);
+    }
+    return id;
+  }
+
+  //call get view here
+  useEffect(() => {
+    const getViews = async () => {
+      try {
+        console.log('[VisitorCounter] Fetching initial view count...');
+        const res = await fetch("/api/views", { cache: "no-store" });
+        const data = await res.json();
+        console.log('[VisitorCounter] Initial count:', data.total);
+        setCount(data.total);
+      } catch (e) {
+        console.error('[VisitorCounter] Error fetching views:', e);
+      }
+    };
+    getViews();
+  }, []);
+
   useEffect(() => {
     const incrementViews = async () => {
       try {
-        const response = await fetch("/api/views", {
+        const id = getVisitorId();
+        console.log('[VisitorCounter] Generated visitor ID:', id);
+        console.log('[VisitorCounter] Incrementing view count...');
+
+        const res = await fetch("/api/views", {
           method: "POST",
           cache: "no-store",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id }),
         });
-        const data = await response.json();
 
-        // Update both states together
+        console.log('[VisitorCounter] POST response status:', res.status);
+
+        if (!res.ok) {
+          const errorText = await res.text();
+          console.error('[VisitorCounter] POST failed:', errorText);
+          throw new Error(`POST /api/views failed: ${res.status}`);
+        }
+
+        const data = await res.json();
+        console.log('[VisitorCounter] Server message:', data.message);
+        if (!data.alreadyExists) {
+          toast(<div className='flex items-center gap-2'>
+            <Avatar>
+              <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />
+              <AvatarFallback className='text-xs'>HR</AvatarFallback>
+            </Avatar>
+            Hey Friend, Welcome to my portfolio!
+          </div>, { id: "visitor-status" });
+        }
+
+        console.log('[VisitorCounter] Updated count:', data.total);
         setCount(data.total);
+
+
         setIsVisible(true);
       } catch (error) {
-        console.error("Failed to increment view count:", error);
-        setIsVisible(true); // still show the badge
+        console.error('[VisitorCounter] Error incrementing views:', error);
+        toast('Could not update visitor count', { id: "visitor-status" });
+        setIsVisible(true);
       }
     };
+
+
     // Skip incrementing views on local development
-    if (isLocal) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIsVisible(true);
-      return;
-    }
+    // if (isLocal) {
+    //   console.log('[VisitorCounter] Running on localhost, skipping increment');
+    //   // eslint-disable-next-line react-hooks/set-state-in-effect
+    //   setIsVisible(true);
+    //   return;
+    // }
+
+    console.log('[VisitorCounter] Running on production, incrementing views...');
     incrementViews();
   }, []);
 
@@ -81,11 +142,13 @@ export function VisitorCounter({ initialCount }: VisitorCounterProps) {
       >
         <Eye className="w-4 h-4 text-blue-500" />
       </motion.div>
-      <div className="flex items-baseline gap-1">
-        <AnimatedNumber value={count} />
-        <span className="text-xs text-zinc-500 dark:text-zinc-400">
-          visitors
-        </span>
+      <div className="flex flex-col gap-0.5">
+        <div className="flex items-baseline gap-1">
+          <AnimatedNumber value={count} />
+          <span className="text-xs text-zinc-500 dark:text-zinc-400">
+            visitors
+          </span>
+        </div>
       </div>
     </motion.div>
   );
